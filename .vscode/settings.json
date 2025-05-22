@@ -1,0 +1,6 @@
+{
+    "cortex-debug.gdbPath": "arm-none-eabi-gdb",
+    "cortex-debug.objdumpPath": "arm-none-eabi-objdump",
+    "cortex-debug.stutilPath": "st-util",
+    "makefile.extensionOutputFolder": "./.vscode"
+}
