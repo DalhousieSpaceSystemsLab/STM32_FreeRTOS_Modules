@@ -22,7 +22,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -66,6 +66,22 @@ void StartDefaultTask(void *argument);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+int _write(int fd, char *ptr, int len) {
+  HAL_StatusTypeDef hstatus;
+
+  if (fd != 1 && fd != 2) {
+    return -1;
+  }
+
+  hstatus = HAL_UART_Transmit(&huart2, (uint8_t*) ptr, len, HAL_MAX_DELAY);
+  
+  if (hstatus == HAL_OK) {
+    return len;
+  }
+
+  return -1;
+}
 
 /* USER CODE END 0 */
 
@@ -136,18 +152,6 @@ int main(void)
 
   /* Start scheduler */
   osKernelStart();
-
-  /* We should never get here as control is now taken by the scheduler */
-
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
-  while (1)
-  {
-    /* USER CODE END WHILE */
-
-    /* USER CODE BEGIN 3 */
-  }
-  /* USER CODE END 3 */
 }
 
 /**
@@ -281,10 +285,12 @@ static void MX_GPIO_Init(void)
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
+
   /* Infinite loop */
   for(;;)
   {
     HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+    printf("Toggled\n\r");
     osDelay(500);
   }
   /* USER CODE END 5 */
