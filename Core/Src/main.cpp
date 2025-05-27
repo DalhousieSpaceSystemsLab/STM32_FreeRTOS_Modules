@@ -18,10 +18,12 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "cmsis_os.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "toggleled_entry.h"
+#include "counting_entry.h"
+
 #include <stdio.h>
 /* USER CODE END Includes */
 
@@ -43,10 +45,15 @@
 /* Private variables ---------------------------------------------------------*/
 UART_HandleTypeDef huart2;
 
-/* Definitions for defaultTask */
-osThreadId_t defaultTaskHandle;
-const osThreadAttr_t defaultTask_attributes = {
-  .name = "defaultTask",
+/* Definitions for tasks */
+const osThreadAttr_t toggleTask_attributes = {
+  .name = "toggle",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+
+const osThreadAttr_t countingTask_attributes = {
+  .name = "counting",
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
@@ -140,7 +147,8 @@ int main(void)
 
   /* Create the thread(s) */
   /* creation of defaultTask */
-  defaultTaskHandle = osThreadNew(toggleled_entry, NULL, &defaultTask_attributes);
+  osThreadNew(toggle_led::entry, NULL, &toggleTask_attributes);
+  osThreadNew(counting::entry, NULL, &countingTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
