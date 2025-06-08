@@ -74,7 +74,7 @@ void StartDefaultTask(void *argument);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-int _write(int fd, char *ptr, int len) {
+extern "C" int _write(int fd, char *ptr, int len) {
   HAL_StatusTypeDef hstatus;
 
   if (fd != 1 && fd != 2) {
@@ -123,6 +123,8 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
+
+  setvbuf(stdout, NULL, _IONBF, 0);
 
   /* USER CODE END 2 */
 
