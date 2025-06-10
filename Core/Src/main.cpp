@@ -45,18 +45,24 @@
 /* Private variables ---------------------------------------------------------*/
 UART_HandleTypeDef huart2;
 
-/* Definitions for tasks */
-const osThreadAttr_t toggleTask_attributes = {
-  .name = "toggle",
-  .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
-};
+constexpr osThreadAttr_t makeTaskAttributes(const char* name, const osPriority_t priority) {
+  return osThreadAttr_t{
+    .name = name,
+    .attr_bits = 0,
+    .cb_mem = nullptr,
+    .cb_size = 0,
+    .stack_mem = nullptr,
+    .stack_size = 128 * 4,
+    .priority = priority,
+    .tz_module = 0,
+    .reserved = 0
+  };
+}
 
-const osThreadAttr_t countingTask_attributes = {
-  .name = "counting",
-  .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
-};
+/* Definitions for tasks */
+const osThreadAttr_t toggleTask_attributes = makeTaskAttributes("Toggle", osPriorityNormal);
+const osThreadAttr_t countingTask_attributes = makeTaskAttributes("Counting", osPriorityNormal);
+
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -170,8 +176,8 @@ int main(void)
   */
 void SystemClock_Config(void)
 {
-  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+  RCC_OscInitTypeDef RCC_OscInitStruct;
+  RCC_ClkInitTypeDef RCC_ClkInitStruct;
 
   /** Configure the main internal regulator output voltage
   */
@@ -251,7 +257,7 @@ static void MX_USART2_UART_Init(void)
   */
 static void MX_GPIO_Init(void)
 {
-  GPIO_InitTypeDef GPIO_InitStruct = {0};
+  GPIO_InitTypeDef GPIO_InitStruct;
 /* USER CODE BEGIN MX_GPIO_Init_1 */
 /* USER CODE END MX_GPIO_Init_1 */
 
