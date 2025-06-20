@@ -37,6 +37,7 @@ csl::PinCommStatus transmit_i2c(csl::PinHandle pin, char *ptr, unsigned int len)
 }
 
 csl::PinCommStatus receive_i2c(csl::PinHandle pin, char *ptr, unsigned int len) {
+    // TODO
     return csl::PinCommStatus::ERROR;
 }
 
