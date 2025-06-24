@@ -17,3 +17,5 @@ foreach(MODULE ${MODULE_DIRS})
         target_include_directories(${PROJECT_NAME} PRIVATE "${MODULE_INC_DIR}")
     endif()
 endforeach()
+    
+target_link_libraries(${PROJECT_NAME} PUBLIC CoreSoftwareLibrary)
