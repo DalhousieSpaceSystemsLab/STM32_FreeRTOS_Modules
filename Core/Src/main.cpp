@@ -24,6 +24,7 @@
 #include "toggleled_entry.h"
 #include "counting_entry.h"
 #include "tc1_entry.h"
+#include "tc2_entry.h"
 
 #include <stdio.h>
 /* USER CODE END Includes */
@@ -64,6 +65,7 @@ constexpr osThreadAttr_t makeTaskAttributes(const char* name, const osPriority_t
 const osThreadAttr_t toggleTask_attributes = makeTaskAttributes("Toggle", osPriorityNormal);
 const osThreadAttr_t countingTask_attributes = makeTaskAttributes("Counting", osPriorityNormal);
 const osThreadAttr_t tc1Task_attributes = makeTaskAttributes("TC1", osPriorityNormal);
+const osThreadAttr_t tc2Task_attributes = makeTaskAttributes("TC2", osPriorityNormal);
 
 /* USER CODE BEGIN PV */
 
@@ -157,9 +159,10 @@ int main(void)
 
   /* Create the thread(s) */
   /* creation of defaultTask */
-  osThreadNew(toggle_led::entry, NULL, &toggleTask_attributes);
-  osThreadNew(counting::entry, NULL, &countingTask_attributes);
+  // osThreadNew(toggle_led::entry, NULL, &toggleTask_attributes);
+  // osThreadNew(counting::entry, NULL, &countingTask_attributes);
   osThreadNew(tc1::entry, NULL, &tc1Task_attributes);
+  osThreadNew(tc2::entry, NULL, &tc2Task_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
