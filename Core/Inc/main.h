@@ -31,6 +31,8 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "stm32defines.h"
+#include "cmsis_os.h"
 
 /* USER CODE END Includes */
 
