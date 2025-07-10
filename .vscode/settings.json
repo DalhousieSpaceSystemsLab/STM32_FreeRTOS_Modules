@@ -2,5 +2,7 @@
     "cortex-debug.gdbPath": "gdb",
     "cortex-debug.objdumpPath": "objdump",
     "cortex-debug.stutilPath": "st-util",
-    "makefile.extensionOutputFolder": "./.vscode"
+    "makefile.extensionOutputFolder": "./.vscode",
+    "nixEnvSelector.suggestion": false,
+    "nixEnvSelector.nixFile": "${workspaceFolder}/shell.nix"
 }
